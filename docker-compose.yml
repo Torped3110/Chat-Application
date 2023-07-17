@@ -1,0 +1,21 @@
+version: "3.8"
+services: 
+  web:
+    build: ./signing
+    ports: 
+      - 3000:3000
+  api :
+    build: ./backend
+    ports:
+      - 9000:9000
+    environment:
+      DB_URL: mongodb://db/users
+  db:
+    image: mongo:4.0-xenial
+    ports:
+      - 27017:27017
+    volumes: 
+      - users:/data/db
+
+volumes:
+  users:
